@@ -10,7 +10,7 @@
     {% do assets.addCss('theme://css/custom.css') %}
     {% do assets.addCss('https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap') %}
     {#con este comando le das salida a todas las instrucciones de assets, si no no aparece nada #}
-    {{ assets.css()| raw }}
+    {{ assets.css()|raw }}
 </head>
 <body>
     <header class="d-flex justify-content-center py-3">
@@ -38,6 +38,6 @@
     {% do assets.addJs('https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js') %}
     {% do assets.addJs('https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js') %}
     {% do assets.addJs('theme://js/scripts.js') %}
-    {{ assets.js()| raw }}    
+    {{ assets.js()|raw }}    
 </body>
 </html>

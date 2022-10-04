@@ -1,0 +1,18 @@
+{% extends 'partials/base.html.twig' %}
+{% block content %}
+<h3>Esta seccion es modular</h3>
+<p class="lead">
+Carga cada miembro de la familia independientemente.
+</p>
+<div class="container text-center">
+    <div class="row">  
+        {% for module in page.collection() %}
+            <div class="col">
+            {{ module.content|raw }}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{# A template that extends another one cannot include content outside Twig blocks. 
+    Did you forget to put the content inside a {% block %} tag? #}    

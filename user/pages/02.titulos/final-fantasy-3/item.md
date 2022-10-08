@@ -1,18 +1,25 @@
 ---
 title: 'Final Fantasy III'
 boxart: ff3-01.jpg
-personaje: ultros.png
+personaje: 0_ultros.png
 categoria: Super Nintendo
+info:
+    desarrollador: 'Squaresoft'
+    disenador: 'Yoshitaka Amano'
+    fecha: '2 de abril de 1994'
+    genero: 'RPG'
+    modo: '2 Jugadores'
+    qty_personajes: 14
+fotoExterna : final-fantasy6-e.jpg
+imgs_primarios: /char_pri
+imgs_secundarios: /char_sec
+imgs_gif: /gifs
+imgs_fanart: /fanart
 ---
 
-#Final Fantasy 3
-
-![Portada del Juego](ff3-01.jpg?classes=img-fluid,w-100&cropResize=1200,850&derivatives=[360,720])
 ___
-**Desarrollado por:** Squaresoft  
-**Año de lanzamiento:** 1994  
-**Genero:** RPG  
- 
+![Link](user://pages/images/ff6w8.png?classes=img-fluid,w-100&cropResize=1200,850&derivatives=[360,720])
+***
 
 Final Fantasy VI tiene lugar en un extenso mundo. Durante el transcurso del juego, su geografía y elementos se verán alterados por diversos acontecimientos en el argumento del juego. En la primera parte del juego, el mundo está dividido en dos grandes continentes y se conoce como "El Mundo en equilibrio". El continente norte está repleto de cadenas montañosas que impiden al jugador acceder a varios lugares fácilmente. Durante el transcurso del juego, la geografía del planeta se ve gravemente alterada, y los dos continentes se dividen convirtiéndose en diversas islas esparcidas con un inmenso continente en el centro del mapa. Este nuevo mundo alterado se conoce como "El Mundo de la Ruina".
 

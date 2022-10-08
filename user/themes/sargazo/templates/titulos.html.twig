@@ -10,7 +10,9 @@
                     <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">{{page.title}}</h3>
                     <ul class="d-flex list-unstyled mt-auto">
                     <li class="me-auto">                        
-                        <img src="{{ page.media[page.header.personaje].resize(32, 32).url() }}" alt="{{page.title}}" class="rounded-circle border border-white">
+                        {% set variableMdPic = page.media[page.header.personaje].resize(32, 32).url() %}
+                        {% set randomFolderPic = random(page.find("#{page.route}#{page.header.imgs_primarios}").media.images).resize(32,32).url()%}
+                        <img src="{{randomFolderPic}}" alt="{{page.title}}" class="rounded-circle border border-white">
                     </li>
                     <li class="d-flex align-items-center">
                         <small>{{page.header.categoria|e}}</small>
@@ -19,7 +21,7 @@
                 </div>
                 <a href="{{ page.url }}" class="stretched-link"></a>
                 </div>
-            </div>
+            </div>                    
             {% endfor %}
             
         </div>    

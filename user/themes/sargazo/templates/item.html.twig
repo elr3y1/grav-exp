@@ -1,0 +1,137 @@
+{% extends "partials/base.html.twig" %}
+    {% block content %}
+ <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-7 col-12">
+			{{ page.media[page.header.boxart].cropResize(1200,850).derivatives(360,720).sizes('200vw').html(page.header.title, page.header.title, 'img-fluid')|raw }}
+		</div>
+		<div class="col-md-5 col-12">
+			<h1>
+				{{page.title}}
+				{#saco una imagen al azar del array gallery que esta en la seccion YAML del MD #}
+				{% if page.header.gallery %}
+					{% set randomMD = random(page.header.gallery) %}
+					{{page.find("#{page.route}#{page.header.imgs_primarios}").media[randomMD.imagen].resize(50,50).html('','','rounded-circle border border-white')|raw}}
+				{% endif %}
+			</h1>
+			{#hago una variable para cortar la cadena que llama a las variables en el MD#}
+			{% set info= page.header.info %}
+			{% if info.desarrollador %}
+            	<b>Desarrollador: </b> {{info.desarrollador}} <br>
+			{% endif %}
+			{% if info.disenador %}
+				<b>Diseño de personajes: </b> {{info.disenador}} <br>
+			{% endif %}
+			{% if info.fecha %}
+				<b>Fecha de lanzamiento: </b> {{info.fecha}} <br>
+			{% endif %}
+			{% if info.genero %}
+				<b>Genero: </b> {{info.genero}} <br>
+			{% endif %}
+			{% if info.modo %}
+				<b>Modos de juego:: </b> {{info.modo}} <br>
+			{% endif %}
+			{% if info.qty_personajes %}
+				<b>Numero de Personajes: </b> {{info.qty_personajes}} <br>
+			{% endif %}
+			{#me muestra un resumen del contenido del MD limitando los caracteres que indique en los ()
+			{{page.summary(60)|raw}} #}			
+			{#llamo a una imagen dentro de una ruta que maqueto concatenando variables del MD
+			1.- Imagen especifica guardada en la variable el_gif dentro del MD:
+			{{page.find("#{page.route}#{page.header.imgs_gif}").media[page.header.el_gif]|raw}}
+			2.- Imagen random del directorio maquetado con una variable del MD que da la ruta .all me carga tmb gifs #}			
+			<div class="card">
+			{{page.find("#{page.route}#{page.header.imgs_gif}").media.all|randomize|first|raw}}	
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			{{page.content|raw}}
+		</div>
+        <div class="col-md-12">
+			{#maqueta las imagenes que encuentra en el folder que contiene el MD activo
+			on slice(1,5) represento el array y me brinco la imagen[0] por comenzar con
+			1 y solo mostrara 5 elementos del array, puedo no limitar los elementos quitando el 5#}
+			<div class="row">
+			{% for image in page.media.images|slice(1) %}		
+				<div class="col-md-4">
+					<div class="card">
+					{{ image.cropResize(650,440).derivatives(360).sizes('200vw').html(page.header.title, page.header.title, 'img-fluid')|raw }}
+					</div>
+				</div>			
+			{% endfor %}
+			</div>	
+			{#busca en el root de pages el folder que indiques en () y muestra la imagen que señales en []#}		
+			<div class="row">
+			{{page.find('/images').media[page.header.fotoExterna].cropResize(1200,850).derivatives(360,720).sizes('200vw').html('img-fluid')|raw}}		
+			</div>			
+			{% if page.header.imgs_primarios %}
+				<div class="row">
+					
+					{% if page.header.gallery %}
+					<h1>Protagonistas</h1>
+						{#maqueta las imagenes que busca al unir la variable img_primarios y gallery del MD activo#}
+						{% set ruta_md = "#{page.route}#{page.header.imgs_primarios}" %}
+						{% for ojo in page.header.gallery %}
+						<div class="col-md-3 col-6">					
+							<div class="card">							
+								{{page.find(ruta_md).media[ojo.imagen].cropResize(360,650).html(ojo.nombre, ojo.nombre, 'card-img-top')|raw}}
+								<div class="card-block">
+									<h5 class="card-title">
+										{{ojo.nombre}}	
+									</h5>
+									<p class="card-text">
+										{{ojo.about|truncate(100)|raw}}	
+									</p>
+								</div>
+							</div>
+						</div>						
+						{% endfor %}
+					{% else %}	
+						<h1>Protagonistas</h1>
+						{% set url_pri = page.find(page.route ~ page.header.imgs_primarios) %}
+						{% for i in url_pri.media.images %}
+							<div class="col-md-3 col-6">
+								<div class="card">
+								{{ i.cropResize(360,650).html('','','img-fluid')|raw }}
+								</div>
+							</div>
+						{% endfor %}	
+					{% endif %}
+				</div>	
+				{#creo unas variables y en su contenido concateno variables y string
+				hago un llamado a las variables del MD que me daran la ruta de fotos:
+				imgs_primarios = personajes primarios
+				imgs_secundarios = personajes secundarios
+				#}
+				<div class="row">
+					<h1>Personajes Secundarios</h1>
+					{% set ruta_dinamica = page.route ~ page.header.imgs_secundarios %}
+					{% set ruta_estatica  = "#{page.route}/char_pri" %}
+					{#maqueta las imagenes que encuentre en el folder que señalo en find()#}
+					{% set url_folder = page.find(ruta_dinamica) %}
+					{% for imagen in url_folder.media.images %}
+					<div class="col-md-2 col-6">
+						<div class="card">
+						{{ imagen.cropResize(320,650).html('',page.title,'img-fluid')|raw }}
+						</div>
+					</div>
+					{% endfor %}	
+				</div>
+			{% endif %}
+			{% set url_custom = page.find("#{page.route}#{page.header.imgs_fanart}") %}
+			{% set foto = random(url_custom.media.images) %}
+			<h1>Fan Art</h1> 
+			<div class="card">
+			{{ foto.cropResize(1200,850).derivatives(360,720).html('img-fluid')|raw }}</p>
+			<div>
+			
+
+			
+	
+	
+        </div>
+	</div>
+</div>
+    {% endblock %}
